@@ -7,21 +7,15 @@ const app = express()
 const router = express.Router()
 
 app.use(cors())
+app.use(bodyParser.json())// for endpoints
 
-router.post('/', async function (req, res) {
-    app.get('https://jsonplaceholder.typicode.com/posts', {
-
-    })
-})
-
-try {
-  const docRef = await addDoc(collection(db, "placeholder"), {
-    
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
+app.post('https://jsonplaceholder.typicode.com/posts',async(req,res) =>{
+    const reqBod = req.body
+    const docRef = doc(firestore, "placeholder", reqBod.name);
+    await setDoc(docRef,{...reqBod})   
+    res.send('Data Recieved in DB')
+    console.log()
+});
 
 // fetch('https://jsonplaceholder.typicode.com/posts', {
 //   method: 'POST',
