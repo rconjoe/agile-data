@@ -12,14 +12,6 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
-app.post('https://jsonplaceholder.typicode.com/posts',async(req,res) =>{
-    const reqBod = req.body
-    const docRef = doc(firestore, "placeholder", reqBod.name);
-    await setDoc(docRef,{...reqBod})   
-    res.send('Data Recieved in DB')
-    console.log(reqBod)
-});
-
 
 
 
